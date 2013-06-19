@@ -7,12 +7,15 @@
 //
 
 #import "AppDelegate.h"
+#import "CDataContainer.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    [[CDataContainer Instance] viewDidLoad];
     return YES;
 }
 							
@@ -41,6 +44,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[CDataContainer Instance] CloseDatabase];
 }
 
 @end

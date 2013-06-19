@@ -1,26 +1,595 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2519" systemVersion="12A206j" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3103" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="dCr-pQ-jFg">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1856"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
+        <!--View Controller - 线路查询-->
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="okk-zN-yEv">
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BusCell" id="vkZ-MZ-Ibu">
+                                        <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <segue destination="j76-RK-fb3" kind="push" identifier="showBusCell" id="tyW-fx-rpr"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="2" id="T68-ry-dXh"/>
+                                    <outlet property="delegate" destination="2" id="1VI-w6-Foq"/>
+                                </connections>
+                            </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="mqn-ui-993">
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="2" id="XnH-b6-gpz"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="okk-zN-yEv" firstAttribute="top" secondItem="mqn-ui-993" secondAttribute="bottom" type="default" id="7L0-xu-nBN"/>
+                            <constraint firstItem="okk-zN-yEv" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="FYE-WS-1K9"/>
+                            <constraint firstItem="okk-zN-yEv" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="HjN-1z-tcm"/>
+                            <constraint firstItem="mqn-ui-993" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="SVu-Mg-MHd"/>
+                            <constraint firstItem="okk-zN-yEv" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="UMz-Cy-A1E"/>
+                            <constraint firstItem="mqn-ui-993" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="WTC-yY-693"/>
+                            <constraint firstItem="mqn-ui-993" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="g4Z-gk-3JL"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="线路查询" id="9YA-hA-Xf0"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="busLineTableView" destination="okk-zN-yEv" id="fYU-DS-apK"/>
+                        <outlet property="searchDisplayController" destination="ak8-1G-KC1" id="Q9Z-yW-JoK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="ak8-1G-KC1">
+                    <connections>
+                        <outlet property="delegate" destination="2" id="18x-t1-pqC"/>
+                        <outlet property="searchBar" destination="mqn-ui-993" id="gWW-3f-8Ud"/>
+                        <outlet property="searchContentsController" destination="2" id="ezi-O7-Y4S"/>
+                        <outlet property="searchResultsDataSource" destination="2" id="HVb-hr-W4e"/>
+                        <outlet property="searchResultsDelegate" destination="2" id="jhu-q3-vqy"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
+            <point key="canvasLocation" x="1188" y="14"/>
+        </scene>
+        <!--Bus Line Detail View Controller-->
+        <scene sceneID="c1R-J2-SBu">
+            <objects>
+                <viewController id="j76-RK-fb3" customClass="CBus_LineDetailViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Cwt-SG-Gqf">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lca-Cz-ecV">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="5qa-Ge-E3G"/>
+                                </constraints>
+                                <string key="text">票价： 一元一票制
+首班： 06:00 　末班： 23:00</string>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="97w-Im-I6H">
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="DetailBusCell" id="qWD-aj-RGv">
+                                        <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <segue destination="Yt7-j5-FBk" kind="push" identifier="showBusDetailCell" id="85j-P2-eJL"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="j76-RK-fb3" id="knj-7c-mwX"/>
+                                    <outlet property="delegate" destination="j76-RK-fb3" id="KiQ-D9-5zW"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lca-Cz-ecV" firstAttribute="trailing" secondItem="Cwt-SG-Gqf" secondAttribute="trailing" type="default" id="FPM-Vf-27q"/>
+                            <constraint firstItem="lca-Cz-ecV" firstAttribute="top" secondItem="Cwt-SG-Gqf" secondAttribute="top" type="default" id="GLa-ZI-Lah"/>
+                            <constraint firstItem="97w-Im-I6H" firstAttribute="trailing" secondItem="Cwt-SG-Gqf" secondAttribute="trailing" type="default" id="PTX-PD-df5"/>
+                            <constraint firstItem="97w-Im-I6H" firstAttribute="top" secondItem="lca-Cz-ecV" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="aAU-Ca-yXK"/>
+                            <constraint firstItem="97w-Im-I6H" firstAttribute="bottom" secondItem="Cwt-SG-Gqf" secondAttribute="bottom" type="default" id="fBs-Vn-MC9"/>
+                            <constraint firstItem="lca-Cz-ecV" firstAttribute="leading" secondItem="Cwt-SG-Gqf" secondAttribute="leading" type="default" id="kbr-OC-g7R"/>
+                            <constraint firstItem="97w-Im-I6H" firstAttribute="leading" secondItem="Cwt-SG-Gqf" secondAttribute="leading" type="default" id="vgL-gd-Dzg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Uba-oR-SJD"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="busLineDetailTableView" destination="97w-Im-I6H" id="7y5-0b-byK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tb9-6M-i0a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1687" y="14"/>
+        </scene>
+        <!--Bus Line Detail Line View Controller-->
+        <scene sceneID="3o6-5U-yRI">
+            <objects>
+                <viewController id="Yt7-j5-FBk" customClass="CBus_LineDetailLineViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jiV-Jn-XgE">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="GAS-bR-zcc">
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="DetailLineCell" id="odB-BO-OJY">
+                                        <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <segue destination="j76-RK-fb3" kind="push" identifier="showBusDetailLine" id="XDT-Ze-JPT"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Yt7-j5-FBk" id="Uwx-P3-77g"/>
+                                    <outlet property="delegate" destination="Yt7-j5-FBk" id="1xS-pJ-QB8"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GAS-bR-zcc" firstAttribute="bottom" secondItem="jiV-Jn-XgE" secondAttribute="bottom" type="default" id="1N2-7y-SMc"/>
+                            <constraint firstItem="GAS-bR-zcc" firstAttribute="leading" secondItem="jiV-Jn-XgE" secondAttribute="leading" type="default" id="DFO-2s-box"/>
+                            <constraint firstItem="GAS-bR-zcc" firstAttribute="top" secondItem="jiV-Jn-XgE" secondAttribute="top" type="default" id="DFb-xq-izv"/>
+                            <constraint firstItem="GAS-bR-zcc" firstAttribute="trailing" secondItem="jiV-Jn-XgE" secondAttribute="trailing" type="default" id="ZwK-eW-vUn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="kVc-SB-gAD"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="busStationDetailView" destination="GAS-bR-zcc" id="I8s-w6-TWJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eBR-YR-B82" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2125" y="14"/>
+        </scene>
+        <!--Navigation Controller - 站站查询-->
+        <scene sceneID="xTU-Zn-fIs">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="8yH-tx-QZW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="站站查询" image="bus_station.png" id="F6S-xc-j2e"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zHR-uE-nLl">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="WOh-Ai-e3E" kind="relationship" relationship="rootViewController" id="1D7-Oj-mja"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5G6-8e-g6y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="768" y="648"/>
+        </scene>
+        <!--Navigation Controller - 收藏历史-->
+        <scene sceneID="QpM-Vc-tqb">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="8mW-KQ-nqe" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="收藏历史" image="bus_favorites.png" id="fla-0c-Bez"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pcx-87-vf8">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ndB-eM-xHG" kind="relationship" relationship="rootViewController" id="LfN-ps-9Iz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="COd-1z-ikl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="768" y="1269"/>
+        </scene>
+        <!--Favorite View Controller - 收藏历史-->
+        <scene sceneID="z4z-0E-cFQ">
+            <objects>
+                <viewController id="ndB-eM-xHG" customClass="CFavoriteViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ynx-kM-jEk">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1R7-Vs-4DG">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="FavoriteCell" id="qDX-Eg-Z9t">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <segue destination="j76-RK-fb3" kind="push" identifier="ShowFavLineDetail" id="zQq-6C-NLJ"/>
+                                            <segue destination="IMg-W1-gis" kind="push" identifier="ShowFavStationDetail" trigger="accessoryAction" id="T29-Mu-fsH"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ndB-eM-xHG" id="xAI-mi-dDq"/>
+                                    <outlet property="delegate" destination="ndB-eM-xHG" id="Wi4-cH-UfS"/>
+                                </connections>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="27C-bA-QrB">
+                                <items>
+                                    <navigationItem id="abT-wy-dfX">
+                                        <nil key="title"/>
+                                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="acV-x2-k0V">
+                                            <rect key="frame" x="66" y="7" width="188" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="收藏线路"/>
+                                                <segment title="收藏站点"/>
+                                                <segment title="收藏站站"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="OnSegmentIndexChanged:" destination="ndB-eM-xHG" eventType="valueChanged" id="20Y-FJ-DMq"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1R7-Vs-4DG" firstAttribute="bottom" secondItem="ynx-kM-jEk" secondAttribute="bottom" type="default" id="CWC-Cq-NWC"/>
+                            <constraint firstItem="27C-bA-QrB" firstAttribute="top" secondItem="ynx-kM-jEk" secondAttribute="top" type="default" id="RHh-kF-vix"/>
+                            <constraint firstItem="1R7-Vs-4DG" firstAttribute="trailing" secondItem="ynx-kM-jEk" secondAttribute="trailing" type="default" id="SN1-he-jjo"/>
+                            <constraint firstItem="1R7-Vs-4DG" firstAttribute="leading" secondItem="ynx-kM-jEk" secondAttribute="leading" type="default" id="UTJ-mM-Pm6"/>
+                            <constraint firstItem="1R7-Vs-4DG" firstAttribute="top" secondItem="27C-bA-QrB" secondAttribute="bottom" type="default" id="Xn2-l7-rKm"/>
+                            <constraint firstItem="27C-bA-QrB" firstAttribute="leading" secondItem="ynx-kM-jEk" secondAttribute="leading" type="default" id="b8p-Ax-tjx"/>
+                            <constraint firstItem="27C-bA-QrB" firstAttribute="trailing" secondItem="ynx-kM-jEk" secondAttribute="trailing" type="default" id="kUV-Mn-FgO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="收藏历史" id="hsG-ED-CaC"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="favNavigationBar" destination="27C-bA-QrB" id="gzL-fe-NuA"/>
+                        <outlet property="favoriteSegCtrl" destination="acV-x2-k0V" id="POJ-vt-3VO"/>
+                        <outlet property="favoriteTableView" destination="1R7-Vs-4DG" id="kkn-ud-DQz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cz4-x3-13q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1182" y="1269"/>
+        </scene>
+        <!--Bus Stat To Stat View Controller - 站站查询-->
+        <scene sceneID="bDy-3M-zcE">
+            <objects>
+                <viewController id="WOh-Ai-e3E" customClass="CBus_StatToStatViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YoN-b7-lnT">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="I8r-ij-DYE">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="StatCell" id="PDb-bm-Fe8">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <segue destination="IMg-W1-gis" kind="push" identifier="ShowStatCell" id="Kq2-vP-gVD"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="WOh-Ai-e3E" id="N8M-Nx-7tc"/>
+                                    <outlet property="delegate" destination="WOh-Ai-e3E" id="cgf-BG-6QV"/>
+                                </connections>
+                            </tableView>
+                            <searchBar contentMode="redraw" placeholder="起始站" translatesAutoresizingMaskIntoConstraints="NO" id="3tB-jf-Txb">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="hmb-kh-geO"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="WOh-Ai-e3E" id="fPs-a2-8eg"/>
+                                </connections>
+                            </searchBar>
+                            <searchBar contentMode="redraw" placeholder="终点站" translatesAutoresizingMaskIntoConstraints="NO" id="RNs-5B-Lzj">
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="WOh-Ai-e3E" id="9mb-sJ-tnz"/>
+                                </connections>
+                            </searchBar>
+                            <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s1d-LA-lIG">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="216" id="HE9-WC-Gfo"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="WOh-Ai-e3E" id="oux-Kl-ZTG"/>
+                                    <outlet property="delegate" destination="WOh-Ai-e3E" id="4UW-ve-Zci"/>
+                                </connections>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="I8r-ij-DYE" firstAttribute="bottom" secondItem="YoN-b7-lnT" secondAttribute="bottom" type="default" id="2x4-8U-t0z"/>
+                            <constraint firstItem="RNs-5B-Lzj" firstAttribute="leading" secondItem="3tB-jf-Txb" secondAttribute="trailing" type="default" id="6pd-KE-kqN"/>
+                            <constraint firstItem="3tB-jf-Txb" firstAttribute="leading" secondItem="YoN-b7-lnT" secondAttribute="leading" type="default" id="CHf-Hk-Nyw"/>
+                            <constraint firstItem="s1d-LA-lIG" firstAttribute="top" secondItem="YoN-b7-lnT" secondAttribute="top" constant="76" id="Gts-fq-TFB"/>
+                            <constraint firstItem="I8r-ij-DYE" firstAttribute="trailing" secondItem="YoN-b7-lnT" secondAttribute="trailing" type="default" id="M3q-g1-9K2"/>
+                            <constraint firstItem="RNs-5B-Lzj" firstAttribute="top" secondItem="YoN-b7-lnT" secondAttribute="top" type="default" id="RNR-s3-vwk"/>
+                            <constraint firstItem="I8r-ij-DYE" firstAttribute="leading" secondItem="YoN-b7-lnT" secondAttribute="leading" type="default" id="dDw-DV-MN9"/>
+                            <constraint firstItem="RNs-5B-Lzj" firstAttribute="trailing" secondItem="YoN-b7-lnT" secondAttribute="trailing" type="default" id="g8i-1S-Ph1"/>
+                            <constraint firstItem="s1d-LA-lIG" firstAttribute="leading" secondItem="YoN-b7-lnT" secondAttribute="leading" type="default" id="g9w-dF-hRV"/>
+                            <constraint firstItem="I8r-ij-DYE" firstAttribute="top" secondItem="3tB-jf-Txb" secondAttribute="bottom" type="default" id="jIn-QA-qpJ"/>
+                            <constraint firstItem="s1d-LA-lIG" firstAttribute="trailing" secondItem="YoN-b7-lnT" secondAttribute="trailing" type="default" id="ll9-Lq-uNJ"/>
+                            <constraint firstItem="3tB-jf-Txb" firstAttribute="top" secondItem="YoN-b7-lnT" secondAttribute="top" type="default" id="nGS-s6-dQV"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="站站查询" id="pBu-eF-kXr"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="beginSearchBar" destination="3tB-jf-Txb" id="sPd-aO-BRF"/>
+                        <outlet property="busStatToStatTableView" destination="I8r-ij-DYE" id="xXE-NB-J7R"/>
+                        <outlet property="endSearchBar" destination="RNs-5B-Lzj" id="keP-0p-sG3"/>
+                        <outlet property="stationPickView" destination="s1d-LA-lIG" id="Vwk-0F-E6W"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cQb-qJ-g39" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1182" y="648"/>
+        </scene>
+        <!--Bus Station Detail View Controller-->
+        <scene sceneID="y1v-tY-cMc">
+            <objects>
+                <viewController storyboardIdentifier="StatDetailViewController" id="IMg-W1-gis" customClass="CBus_StationDetailViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="StatDetailViewController" id="MtU-M6-J9E">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7J2-P3-h5z">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="StatDetailCell" id="q9e-GU-2QP">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <segue destination="q9r-NT-dmN" kind="push" identifier="ShowStatDetailCell" id="edP-N0-VDF"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="IMg-W1-gis" id="kg6-kU-2Vi"/>
+                                    <outlet property="delegate" destination="IMg-W1-gis" id="qIv-T9-pMv"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7J2-P3-h5z" firstAttribute="trailing" secondItem="MtU-M6-J9E" secondAttribute="trailing" type="default" id="ABV-dq-r6w"/>
+                            <constraint firstItem="7J2-P3-h5z" firstAttribute="leading" secondItem="MtU-M6-J9E" secondAttribute="leading" type="default" id="B8o-qG-EiU"/>
+                            <constraint firstItem="7J2-P3-h5z" firstAttribute="top" secondItem="MtU-M6-J9E" secondAttribute="top" type="default" id="Ceg-Dl-HbD"/>
+                            <constraint firstItem="7J2-P3-h5z" firstAttribute="bottom" secondItem="MtU-M6-J9E" secondAttribute="bottom" type="default" id="Vf1-8v-hvA"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Qfy-hn-Z6W"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="busStationDetailView" destination="7J2-P3-h5z" id="lhA-j2-Rtw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bvn-Os-NRS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1633" y="648"/>
+        </scene>
+        <!--Bus Stat Detail Stat View Controller-->
+        <scene sceneID="iCe-C8-Nfg">
+            <objects>
+                <viewController id="q9r-NT-dmN" customClass="CBus_StatDetailStatViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s4B-lg-zKM">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJO-2K-fbG">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="85" id="sWD-Vg-kTN"/>
+                                </constraints>
+                                <string key="text">票价： 一元一票制
+紫薇田园都市—火车站西
+首班： 06:00 　末班： 23:00</string>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="5GG-dE-y2u">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="StatToStatDetailCell" id="aQV-MN-v3z">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <segue destination="IMg-W1-gis" kind="push" identifier="ShowStatToStatDetail" id="aDI-vA-TnJ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="q9r-NT-dmN" id="T4q-ng-ANt"/>
+                                    <outlet property="delegate" destination="q9r-NT-dmN" id="IzX-CN-a0n"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hJO-2K-fbG" firstAttribute="leading" secondItem="s4B-lg-zKM" secondAttribute="leading" type="default" id="4b4-Jo-9Sb"/>
+                            <constraint firstItem="5GG-dE-y2u" firstAttribute="bottom" secondItem="s4B-lg-zKM" secondAttribute="bottom" type="default" id="B7N-Fh-dK0"/>
+                            <constraint firstItem="5GG-dE-y2u" firstAttribute="leading" secondItem="s4B-lg-zKM" secondAttribute="leading" type="default" id="Ea1-4v-nuQ"/>
+                            <constraint firstItem="hJO-2K-fbG" firstAttribute="top" secondItem="s4B-lg-zKM" secondAttribute="top" type="default" id="OH1-sC-g7S"/>
+                            <constraint firstItem="5GG-dE-y2u" firstAttribute="top" secondItem="hJO-2K-fbG" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Wc4-dP-Zcf"/>
+                            <constraint firstItem="hJO-2K-fbG" firstAttribute="trailing" secondItem="s4B-lg-zKM" secondAttribute="trailing" type="default" id="lA7-B1-Sz2"/>
+                            <constraint firstItem="5GG-dE-y2u" firstAttribute="trailing" secondItem="s4B-lg-zKM" secondAttribute="trailing" type="default" id="qOE-Vo-RQ7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="n20-1p-o8U"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="busLineDetailTableView" destination="5GG-dE-y2u" id="zTn-E3-XpL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1oK-dp-tws" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2114" y="648"/>
+        </scene>
+        <!--Navigation Controller - 线路查询-->
+        <scene sceneID="YRO-hB-L62">
+            <objects>
+                <navigationController id="orb-TQ-h9s" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="线路查询" image="bus_line.png" id="Qt2-QN-lVz"/>
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="C4o-Ep-hK5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2" kind="relationship" relationship="rootViewController" id="vtk-Eh-A8D"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="khS-0d-5aS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="768" y="14"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="m2j-bE-Wya">
+            <objects>
+                <tabBarController id="dCr-pQ-jFg" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="kZU-20-W4C">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="orb-TQ-h9s" kind="relationship" relationship="viewControllers" id="iEB-rM-cKa"/>
+                        <segue destination="8yH-tx-QZW" kind="relationship" relationship="viewControllers" id="IDN-Mp-hFR"/>
+                        <segue destination="8mW-KQ-nqe" kind="relationship" relationship="viewControllers" id="4cG-Ru-oLe"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rOg-GM-i7g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="179" y="1177"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bus_favorites.png" width="24" height="24"/>
+        <image name="bus_line.png" width="24" height="24"/>
+        <image name="bus_station.png" width="24" height="24"/>
+    </resources>
+    <classes>
+        <class className="CBus_LineDetailLineViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CBus_LineDetailLineViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="busStationDetailView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="CBus_LineDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CBus_LineDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="busLineDetailTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="CBus_StatDetailStatViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CBus_StatDetailStatViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="busLineDetailTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="CBus_StatToStatViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CBus_StatToStatViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="HideKeyBoard:"/>
+                <relationship kind="outlet" name="beginSearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="busStatToStatTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="endSearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="stationPickView" candidateClass="UIPickerView"/>
+            </relationships>
+        </class>
+        <class className="CBus_StationDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CBus_StationDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="busStationDetailView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="CFavoriteViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CFavoriteViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="OnSegmentIndexChanged:"/>
+                <relationship kind="outlet" name="favNavigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="favoriteSegCtrl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="favoriteTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="busLineTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Kq2-vP-gVD"/>
+        <segue reference="tyW-fx-rpr"/>
+    </inferredMetricsTieBreakers>
 </document>

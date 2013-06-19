@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,
+                    UISearchBarDelegate,UISearchDisplayDelegate>
+{
+    UITableView *busLineTableView;
+    NSMutableArray *filteredListContent;
+//    NSArray *recipes;
+}
+
+@property (nonatomic, retain) IBOutlet UITableView *busLineTableView;
+@property (nonatomic, retain) NSMutableArray *filteredListContent;
 
 @end
